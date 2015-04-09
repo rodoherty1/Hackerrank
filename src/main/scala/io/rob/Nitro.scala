@@ -21,4 +21,25 @@ object Nitro {
 
     myMap.foldLeft(IntMap.empty[List[String]])((m, v) => m.updated(v._1.toInt, v._2))
   }
+
+
+  def doIt2(): IntMap[List[String]] = {
+    val m1 = IntMap(1 -> "un", 2 -> "deux", 3 -> "trois").values.toList
+    val m2 = IntMap(1 -> "one", 2 -> "two", 3 -> "three").values.toList
+
+    val z = m1 zip m2
+
+    val i: List[List[String]] = for {
+      (a, b) <- z
+    } yield List(a, b)
+
+    def loop(acc: IntMap[List[String]], index: Int, l: List[List[String]]): IntMap[List[String]] = {
+      l match {
+        case Nil => acc
+        case _ => loop(acc.updated(index, l.head), index+1, l.tail)
+      }
+    }
+
+    loop(IntMap.empty[List[String]], 1, i)
+  }
 }

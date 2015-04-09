@@ -9,9 +9,12 @@ import scala.collection.immutable.IntMap
  */
 class NitroTest extends WordSpec with Matchers {
 
-  "My Next Kata app" should {
+  "My Nitro App" should {
     "map shit out" in {
       Nitro.doIt() should equal(IntMap(1 -> List("un", "one"), 2 -> List("deux", "two"), 3-> List("trois", "three")))
+    }
+    "map more shit out" in {
+      Nitro.doIt2() should equal(IntMap(1 -> List("un", "one"), 2 -> List("deux", "two"), 3-> List("trois", "three")))
     }
   }
 
