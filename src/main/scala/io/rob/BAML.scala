@@ -28,5 +28,32 @@ object BAML {
   def modify[A](f: A => A)(l: List[A]): List[A] = {
     l map f
   }
+
+  def zipWith[A](l1: List[A], l2: List[A], f: (A, A) => A): List[A] = {
+    (l1, l2) match {
+      case (Nil, _) => Nil
+      case (_, Nil) => Nil
+      case ((h1 :: t1), (h2 :: t2)) => f(h1, h2) :: zipWith(t1, t2, f)
+    }
+  }
+
+  def startsWith[A](sup: List[A], sub: List[A]): Boolean = {
+    val f: ((A, A) => Boolean) = (a1, a2) => a1.equals(a2)
+    (sup, sub) match {
+      case (Nil, _) => false
+      case (_, Nil) => true
+      case ((h1::t1), (h2::t2)) => if (h1.equals(h2)) startsWith(t1, t2) else false
+    }
+  }
+
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
+    if (sup.length < sub.length) false
+    else {
+      sup match {
+        case Nil => true
+        case h :: t => if (sup.startsWith(sub)) true else hasSubsequence(t, sub)
+      }
+    }
+  }
 }
 
