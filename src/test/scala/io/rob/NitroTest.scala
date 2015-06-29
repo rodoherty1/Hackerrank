@@ -16,6 +16,9 @@ class NitroTest extends WordSpec with Matchers {
     "map more shit out" in {
       Nitro.doIt2() should equal(IntMap(1 -> List("un", "one"), 2 -> List("deux", "two"), 3-> List("trois", "three")))
     }
+    "map even more shit out" in {
+      Nitro.doIt3() should equal(IntMap(1 -> List("un", "one"), 2 -> List("deux", "two"), 3-> List("trois", "three")))
+    }
   }
 
 }

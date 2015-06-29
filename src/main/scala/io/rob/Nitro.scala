@@ -42,4 +42,18 @@ object Nitro {
 
     loop(IntMap.empty[List[String]], 1, i)
   }
+
+  def doIt3(): IntMap[List[String]] = {
+    val m1 = IntMap(1 -> "one", 2 -> "two", 3 -> "three")
+    val m2 = IntMap(1 -> "un", 2 -> "deux", 3 -> "trois")
+
+    val m = m1.map(e => (e._1, List(e._2)))
+    m2.foldLeft(m)((z, e) => {
+      if (z.contains(e._1)) {
+        z.updated(e._1, e._2 :: z(e._1))
+      } else {
+        z.updated(e._1, List(e._2))
+      }
+    })
+  }
 }
