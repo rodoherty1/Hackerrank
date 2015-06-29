@@ -25,6 +25,23 @@ class BAMLTest extends WordSpec with Matchers {
       BAML.hasSubsequence(List(1, 2,3, 4), List.empty[Int]) should be (true)
       BAML.hasSubsequence(List(1), List(1, 2)) should be (false)
     }
+
+    "demonstrate traverse()" in {
+      val a = List (1, 2)
+      val f: Int => Option[String] = i => Some(i.toString)
+
+      BAML.traverse(a)(f) should equal(Some(List("1", "2")))
+    }
+
+    "demonstrate sequence()" in {
+      val a = List(Some(1), Some(2))
+      BAML.sequence(a) should equal (Some(List(1, 2)))
+    }
+
+//    "demonstrate sequence in terms traverse()" in {
+//      val a = List(Some(1), Some(2))
+//      BAML.sequenceInTermsOfTraverse(a) should equal (Some(List(1, 2)))
+//    }
   }
 
 }

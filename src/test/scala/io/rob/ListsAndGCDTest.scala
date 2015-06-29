@@ -40,8 +40,8 @@ class ListsAndGCDTest extends WordSpec with Matchers {
     }
 
     "Go" in {
-      go(List("2", "7 2", "2 2 7 1")) should equal ("7 1")
-      go(List("4", "2 2 3 2 5 3", "3 2 5 3 11 1", "2 2 3 3 5 4 7 6 19 18", "3 10 5 15")) should equal ("3 2 5 3")
+      go(List("2", "7 2", "2 2 7 1")) should contain allOf (7, 1)
+      go(List("4", "2 2 3 2 5 3", "3 2 5 3 11 1", "2 2 3 3 5 4 7 6 19 18", "3 10 5 15")) should contain theSameElementsAs (List(3, 2, 5, 3))
     }
 
     "Primes" in {

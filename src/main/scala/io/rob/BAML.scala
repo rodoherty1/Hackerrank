@@ -62,9 +62,22 @@ object BAML {
 
   def sequence[A](a: List[Option[A]]): Option[List[A]] = {
     a match {
-      case Nil => None
+      case Nil => Some(Nil)
       case h :: t => h flatMap (hh => sequence(t) map (hh :: _))
     }
   }
+
+//  def sequenceInTermsOfTraverse[A](a: List[Option[A]]): Option[List[A]] = {
+//    traverse(a)(x => x)
+//  }
+
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = {
+    a match {
+      case Nil => Some(Nil)
+      case h :: t => f(h) flatMap (b => traverse(t)(f) map (b :: _))
+    }
+  }
+
+
 }
 
